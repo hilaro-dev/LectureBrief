@@ -227,6 +227,7 @@ class ProcessingRepository(
             ## Detailed Notes
 
             Be accurate, concise, and preserve technical terms, equations, and deadlines mentioned in the lecture.
+            Prefer clean Unicode mathematical symbols (such as Δ, ∫, ∑, ∂, λ, θ, ≤, ≥, →, ², ₀) and readable plain-text equations rather than raw LaTeX `$ ... $` wrappers.
         """.trimIndent()
     }
 }

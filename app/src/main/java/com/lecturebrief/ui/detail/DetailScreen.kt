@@ -1,6 +1,7 @@
 package com.lecturebrief.ui.detail
 
 import android.content.Intent
+import com.lecturebrief.ui.util.LatexMathFormatter
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -511,7 +512,9 @@ private fun TranscriptTabContent(transcriptText: String?) {
 
 @Composable
 private fun MarkdownContent(markdown: String) {
-    val lines = remember(markdown) { markdown.lines() }
+    val lines = remember(markdown) {
+        LatexMathFormatter.formatMathInMarkdown(markdown).lines()
+    }
 
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         lines.forEach { rawLine ->
