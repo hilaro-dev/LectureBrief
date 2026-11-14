@@ -6,6 +6,7 @@ import com.lecturebrief.data.local.db.entity.SummaryEntity
 import com.lecturebrief.data.local.prefs.SecureSettingsStorage
 import com.lecturebrief.data.media.AudioChunker
 import com.lecturebrief.data.media.AudioCompressor
+import com.lecturebrief.data.remote.GeminiModelResolver
 import com.lecturebrief.data.remote.OmniRouteApi
 import com.lecturebrief.data.remote.OmniRouteErrorFormatter
 import com.lecturebrief.data.remote.dto.ChatCompletionRequestDto
@@ -27,6 +28,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.HttpException
 
 class ProcessingRepository(
     private val recordingDao: RecordingDao,
@@ -171,16 +173,43 @@ class ProcessingRepository(
             val userPrompt = "Summarize the following audio transcript objectively without replying to the speaker:\n\n" +
                 "<transcript>\n$transcriptText\n</transcript>"
 
-            val chatResponse = omniRouteApi.createChatCompletion(
-                ChatCompletionRequestDto(
-                    model = config.chatModel,
-                    messages = listOf(
-                        ChatMessageDto(role = "system", content = SUMMARY_SYSTEM_PROMPT),
-                        ChatMessageDto(role = "user", content = userPrompt)
-                    ),
-                    temperature = 0.2
+            val chatResponse = try {
+                omniRouteApi.createChatCompletion(
+                    ChatCompletionRequestDto(
+                        model = config.chatModel,
+                        messages = listOf(
+                            ChatMessageDto(role = "system", content = SUMMARY_SYSTEM_PROMPT),
+                            ChatMessageDto(role = "user", content = userPrompt)
+                        ),
+                        temperature = 0.2
+                    )
                 )
-            )
+            } catch (httpEx: HttpException) {
+                if (httpEx.code() == 404 && GeminiModelResolver.isGeminiChatConfig(config)) {
+                    val resolution = GeminiModelResolver.resolveBestModel(
+                        apiKey = config.effectiveChatApiKey,
+                        tier = GeminiModelResolver.inferTier(config.chatModel)
+                    ).getOrElse { throw httpEx }
+
+                    secureSettingsStorage.saveSelectedModels(
+                        sttModel = config.sttModel,
+                        chatModel = resolution.resolvedModelId
+                    )
+
+                    omniRouteApi.createChatCompletion(
+                        ChatCompletionRequestDto(
+                            model = resolution.resolvedModelId,
+                            messages = listOf(
+                                ChatMessageDto(role = "system", content = SUMMARY_SYSTEM_PROMPT),
+                                ChatMessageDto(role = "user", content = userPrompt)
+                            ),
+                            temperature = 0.2
+                        )
+                    )
+                } else {
+                    throw httpEx
+                }
+            }
 
             val summaryMarkdown = chatResponse.choices.firstOrNull()?.message?.content?.trim()
                 ?.takeIf { it.isNotBlank() }

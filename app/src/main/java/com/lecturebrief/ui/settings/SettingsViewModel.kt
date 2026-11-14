@@ -154,26 +154,28 @@ class SettingsViewModel(
     }
 
     fun onSttTierSelected(tier: ModelTier) {
+        val current = _uiState.value
+        val model = current.sttPreset.sttTiers().firstOrNull { it.first == tier }?.second ?: return
+        settingsRepository.updateSelectedModels(sttModel = model, chatModel = current.chatModel)
         _uiState.update { state ->
-            val model = state.sttPreset.sttTiers().firstOrNull { it.first == tier }?.second
-                ?: return@update state
             state.copy(
                 sttTier = tier,
                 sttModel = model,
-                isSaved = false
+                isSaved = true
             )
         }
     }
 
     fun onChatTierSelected(tier: ModelTier) {
+        val current = _uiState.value
+        val activePreset = if (current.useSameProvider) current.sttPreset else current.chatPreset
+        val model = activePreset.chatTiers().firstOrNull { it.first == tier }?.second ?: return
+        settingsRepository.updateSelectedModels(sttModel = current.sttModel, chatModel = model)
         _uiState.update { state ->
-            val activePreset = if (state.useSameProvider) state.sttPreset else state.chatPreset
-            val model = activePreset.chatTiers().firstOrNull { it.first == tier }?.second
-                ?: return@update state
             state.copy(
                 chatTier = tier,
                 chatModel = model,
-                isSaved = false
+                isSaved = true
             )
         }
     }
@@ -293,8 +295,10 @@ class SettingsViewModel(
 
             settingsRepository.testConnections()
                 .onSuccess { result ->
+                    val updatedConfig = settingsRepository.getCurrentConfig()
                     _uiState.update {
                         it.copy(
+                            chatModel = updatedConfig.chatModel,
                             availableModels = result.models.map { model -> model.id },
                             connectionStatus = GatewayConnectionStatus.CONNECTED,
                             connectionSummary = result.summaryMessage,

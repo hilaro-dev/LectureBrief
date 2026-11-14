@@ -29,6 +29,7 @@ import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
@@ -473,6 +474,13 @@ fun SettingsScreen(
                         if (isSelected) {
                             Icon(
                                 imageVector = Icons.Default.Check,
+                                contentDescription = palette.label,
+                                tint = Color.White,
+                                modifier = Modifier.size(18.dp)
+                            )
+                        } else if (palette == AppColorPalette.WALLPAPER) {
+                            Icon(
+                                imageVector = Icons.Default.Palette,
                                 contentDescription = palette.label,
                                 tint = Color.White,
                                 modifier = Modifier.size(18.dp)

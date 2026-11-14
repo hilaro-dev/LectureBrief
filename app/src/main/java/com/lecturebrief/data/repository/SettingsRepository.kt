@@ -3,6 +3,7 @@ package com.lecturebrief.data.repository
 import com.lecturebrief.data.local.prefs.GatewayConfig
 import com.lecturebrief.data.local.prefs.ProviderPreset
 import com.lecturebrief.data.local.prefs.SecureSettingsStorage
+import com.lecturebrief.data.remote.GeminiModelResolver
 import com.lecturebrief.data.remote.OmniRouteApi
 import com.lecturebrief.data.remote.OmniRouteClient
 import com.lecturebrief.data.remote.OmniRouteErrorFormatter
@@ -97,8 +98,21 @@ class SettingsRepository(
             )
         }
 
-        val chatResult = runCatching {
-            omniRouteApi.getModels(target = OmniRouteClient.TARGET_CHAT).data.sortedBy { it.id }
+        val chatResult = if (GeminiModelResolver.isGeminiChatConfig(config)) {
+            GeminiModelResolver.resolveBestModel(
+                apiKey = config.effectiveChatApiKey,
+                tier = GeminiModelResolver.inferTier(config.chatModel)
+            ).map { resolution ->
+                secureSettingsStorage.saveSelectedModels(
+                    sttModel = config.sttModel,
+                    chatModel = resolution.resolvedModelId
+                )
+                resolution.availableModels.map { ModelDto(id = it) }
+            }
+        } else {
+            runCatching {
+                omniRouteApi.getModels(target = OmniRouteClient.TARGET_CHAT).data.sortedBy { it.id }
+            }
         }
 
         val sttModels = sttResult.getOrNull()
@@ -106,10 +120,16 @@ class SettingsRepository(
 
         if (sttModels != null && chatModels != null) {
             val combined = (sttModels + chatModels).distinctBy { it.id }.sortedBy { it.id }
+            val resolvedChatModel = getCurrentConfig().chatModel
+            val chatSummary = if (GeminiModelResolver.isGeminiChatConfig(config)) {
+                "Summary: Connected (${chatModels.size} models, active: $resolvedChatModel)"
+            } else {
+                "Summary: Connected (${chatModels.size} models)"
+            }
             Result.success(
                 ConnectionTestResult(
                     models = combined,
-                    summaryMessage = "STT: Connected (${sttModels.size} models)\nSummary: Connected (${chatModels.size} models)"
+                    summaryMessage = "STT: Connected (${sttModels.size} models)\n$chatSummary"
                 )
             )
         } else {

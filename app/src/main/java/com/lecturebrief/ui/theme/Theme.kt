@@ -14,8 +14,53 @@ import androidx.compose.ui.platform.LocalContext
 import com.lecturebrief.data.local.prefs.AppColorPalette
 import com.lecturebrief.data.local.prefs.ThemeMode
 
-private val DefaultLightColorScheme = lightColorScheme()
-private val DefaultDarkColorScheme = darkColorScheme()
+private val MidnightPeriwinkleLight = lightColorScheme(
+    primary = Color(0xFF3E56C4),
+    onPrimary = Color(0xFFFFFFFF),
+    primaryContainer = Color(0xFFDDE1FF),
+    onPrimaryContainer = Color(0xFF001258),
+    secondary = Color(0xFF5A5D72),
+    onSecondary = Color(0xFFFFFFFF),
+    secondaryContainer = Color(0xFFDFE1F9),
+    onSecondaryContainer = Color(0xFF171B2C),
+    tertiary = Color(0xFF76546E),
+    onTertiary = Color(0xFFFFFFFF),
+    tertiaryContainer = Color(0xFFFFD7F2),
+    onTertiaryContainer = Color(0xFF2C1228),
+    background = Color(0xFFFAF8FF),
+    onBackground = Color(0xFF1A1B21),
+    surface = Color(0xFFFAF8FF),
+    onSurface = Color(0xFF1A1B21),
+    surfaceContainerLowest = Color(0xFFFFFFFF),
+    surfaceContainerLow = Color(0xFFF3F3FA),
+    surfaceContainer = Color(0xFFEDEDF4),
+    surfaceContainerHigh = Color(0xFFE7E7EE),
+    surfaceContainerHighest = Color(0xFFE2E2E9)
+)
+
+private val MidnightPeriwinkleDark = darkColorScheme(
+    primary = Color(0xFFB8C4FF),
+    onPrimary = Color(0xFF04238F),
+    primaryContainer = Color(0xFF233CA9),
+    onPrimaryContainer = Color(0xFFDDE1FF),
+    secondary = Color(0xFFC3C5DD),
+    onSecondary = Color(0xFF2C2F42),
+    secondaryContainer = Color(0xFF424659),
+    onSecondaryContainer = Color(0xFFDFE1F9),
+    tertiary = Color(0xFFE5BAD8),
+    onTertiary = Color(0xFF44263E),
+    tertiaryContainer = Color(0xFF5C3C55),
+    onTertiaryContainer = Color(0xFFFFD7F2),
+    background = Color(0xFF121318),
+    onBackground = Color(0xFFE2E2E9),
+    surface = Color(0xFF121318),
+    onSurface = Color(0xFFE2E2E9),
+    surfaceContainerLowest = Color(0xFF0D0E13),
+    surfaceContainerLow = Color(0xFF1A1B21),
+    surfaceContainer = Color(0xFF1E1F25),
+    surfaceContainerHigh = Color(0xFF282A2F),
+    surfaceContainerHighest = Color(0xFF33343A)
+)
 
 private val DeepTealLight = lightColorScheme(
     primary = Color(0xFF1E4D5E),
@@ -171,7 +216,7 @@ private val WarmAmberDark = darkColorScheme(
 fun LectureBriefTheme(
     themeMode: ThemeMode = ThemeMode.SYSTEM_DEFAULT,
     colorPalette: AppColorPalette = AppColorPalette.MIDNIGHT_PERIWINKLE,
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val darkTheme = when (themeMode) {
@@ -181,19 +226,20 @@ fun LectureBriefTheme(
     }
 
     val colorScheme: ColorScheme = when (colorPalette) {
-        AppColorPalette.MIDNIGHT_PERIWINKLE -> when {
-            dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-                val context = LocalContext.current
-                if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-            }
-            darkTheme -> DefaultDarkColorScheme
-            else -> DefaultLightColorScheme
-        }
+        AppColorPalette.MIDNIGHT_PERIWINKLE -> if (darkTheme) MidnightPeriwinkleDark else MidnightPeriwinkleLight
         AppColorPalette.DEEP_TEAL -> if (darkTheme) DeepTealDark else DeepTealLight
         AppColorPalette.ROYAL_VIOLET -> if (darkTheme) RoyalVioletDark else RoyalVioletLight
         AppColorPalette.EMERALD_FOREST -> if (darkTheme) EmeraldForestDark else EmeraldForestLight
         AppColorPalette.CRIMSON_ROSE -> if (darkTheme) CrimsonRoseDark else CrimsonRoseLight
         AppColorPalette.WARM_AMBER -> if (darkTheme) WarmAmberDark else WarmAmberLight
+        AppColorPalette.WALLPAPER -> when {
+            (dynamicColor || Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+                val context = LocalContext.current
+                if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            }
+            darkTheme -> MidnightPeriwinkleDark
+            else -> MidnightPeriwinkleLight
+        }
     }
 
     MaterialTheme(

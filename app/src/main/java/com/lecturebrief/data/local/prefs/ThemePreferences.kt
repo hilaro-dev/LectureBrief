@@ -16,12 +16,13 @@ enum class AppColorPalette(
     val label: String,
     val swatchArgb: Long
 ) {
-    MIDNIGHT_PERIWINKLE("Midnight Periwinkle", 0xFF6650A4),
+    MIDNIGHT_PERIWINKLE("Midnight Periwinkle", 0xFF4F6DF5),
     DEEP_TEAL("Deep Teal", 0xFF1E4D5E),
     ROYAL_VIOLET("Royal Violet", 0xFF7C4DFF),
     EMERALD_FOREST("Emerald Forest", 0xFF2E7D32),
     CRIMSON_ROSE("Crimson Rose", 0xFFC62828),
-    WARM_AMBER("Warm Amber", 0xFFEF6C00)
+    WARM_AMBER("Warm Amber", 0xFFEF6C00),
+    WALLPAPER("Wallpaper", 0xFF757575)
 }
 
 class ThemePreferences(context: Context) {

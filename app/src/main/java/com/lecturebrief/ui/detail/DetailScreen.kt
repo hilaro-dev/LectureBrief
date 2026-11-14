@@ -368,7 +368,7 @@ private fun ProcessingStatusSection(
             ) {
                 Text(
                     text = processingMessage ?: when (status) {
-                        ProcessingStatus.PENDING -> "Preparing OmniRoute AI pipeline..."
+                        ProcessingStatus.PENDING -> "Preparing AI pipeline..."
                         ProcessingStatus.TRANSCRIBING -> "Transcribing audio..."
                         ProcessingStatus.SUMMARIZING -> "Generating summary..."
                         else -> ""
@@ -443,7 +443,7 @@ private fun SummaryTabContent(
             ProcessingStatus.PENDING,
             ProcessingStatus.TRANSCRIBING,
             ProcessingStatus.SUMMARIZING -> "Your structured lecture summary will appear here once processing finishes."
-            ProcessingStatus.ERROR -> "Summary unavailable. Fix your OmniRoute settings or tap Retry above."
+            ProcessingStatus.ERROR -> "Summary unavailable. Check your API key in Settings or tap Retry above."
             else -> "No summary generated yet."
         }
         Text(
