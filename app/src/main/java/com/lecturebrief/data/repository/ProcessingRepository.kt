@@ -107,10 +107,11 @@ class ProcessingRepository(
                         val mimeType = when (chunkFile.extension.lowercase()) {
                             "m4a", "mp4" -> "audio/mp4"
                             "mp3" -> "audio/mpeg"
+                            "wav" -> "audio/wav"
                             "ogg" -> "audio/ogg"
                             "aac" -> "audio/aac"
                             "flac" -> "audio/flac"
-                            else -> "audio/wav"
+                            else -> "audio/mp4"
                         }
                         val filePart = MultipartBody.Part.createFormData(
                             name = "file",
