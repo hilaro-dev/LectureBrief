@@ -15,11 +15,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 
 /**
- * Configures OkHttp + Retrofit for the OpenAI-compatible OmniRoute BYOK gateway.
+ * Configures OkHttp + Retrofit for OpenAI-compatible gateways and direct cloud providers.
  */
 object OmniRouteClient {
 
     private const val PLACEHOLDER_RETROFIT_BASE_URL = "http://localhost/"
+    const val TARGET_HEADER = "X-LB-Target"
+    const val TARGET_STT = "stt"
+    const val TARGET_CHAT = "chat"
 
     fun createOkHttpClient(secureSettingsStorage: SecureSettingsStorage): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -51,8 +54,9 @@ object OmniRouteClient {
 }
 
 /**
- * OkHttp interceptor that dynamically reads `baseUrl` from [SecureSettingsStorage]
- * and injects `Authorization: Bearer <apiKey>` only when `apiKey` is non-blank.
+ * OkHttp interceptor that dynamically routes each request to either the active STT or
+ * Summary (LLM) Base URL + API Key from [SecureSettingsStorage], normalizing path segments
+ * so trailing slashes or endpoints like `.../v1` and `.../openai` never produce double slashes.
  */
 class OmniRouteGatewayInterceptor(
     private val secureSettingsStorage: SecureSettingsStorage
@@ -62,18 +66,27 @@ class OmniRouteGatewayInterceptor(
         val originalRequest = chain.request()
         val config = secureSettingsStorage.getCurrentConfig()
 
-        val configuredBaseUrl = config.baseUrl.toHttpUrlOrNull()
-            ?: throw IOException("Invalid OmniRoute Base URL: \"${config.baseUrl}\"")
+        val requestSegments = originalRequest.url.encodedPathSegments.filter { it.isNotEmpty() }
+        val target = originalRequest.header(OmniRouteClient.TARGET_HEADER)
+            ?: if (requestSegments.lastOrNull() == "completions") {
+                OmniRouteClient.TARGET_CHAT
+            } else {
+                OmniRouteClient.TARGET_STT
+            }
+
+        val (rawBaseUrl, rawApiKey) = if (target == OmniRouteClient.TARGET_CHAT) {
+            config.effectiveChatBaseUrl to config.effectiveChatApiKey
+        } else {
+            config.baseUrl to config.apiKey
+        }
+
+        val normalizedRawUrl = rawBaseUrl.trim().trimEnd('/')
+        val configuredBaseUrl = normalizedRawUrl.toHttpUrlOrNull()
+            ?: throw IOException("Invalid ${if (target == OmniRouteClient.TARGET_CHAT) "Summary" else "STT"} Base URL: \"$rawBaseUrl\"")
 
         val baseSegments = configuredBaseUrl.encodedPathSegments.filter { it.isNotEmpty() }
-        val requestSegments = originalRequest.url.encodedPathSegments.filter { it.isNotEmpty() }
-
-        // Prevent duplicate /v1 when configured baseUrl already ends with /v1
-        // and the Retrofit endpoint starts with v1/...
-        val effectiveBaseSegments = if (
-            baseSegments.lastOrNull() == "v1" && requestSegments.firstOrNull() == "v1"
-        ) {
-            baseSegments.dropLast(1)
+        val effectiveBaseSegments = if (baseSegments.isEmpty()) {
+            listOf("v1")
         } else {
             baseSegments
         }
@@ -89,10 +102,11 @@ class OmniRouteGatewayInterceptor(
 
         val requestBuilder = originalRequest.newBuilder()
             .url(urlBuilder.build())
+            .removeHeader(OmniRouteClient.TARGET_HEADER)
             .header("Accept", "application/json")
 
-        if (config.apiKey.isNotBlank()) {
-            requestBuilder.header("Authorization", "Bearer ${config.apiKey}")
+        if (rawApiKey.isNotBlank()) {
+            requestBuilder.header("Authorization", "Bearer $rawApiKey")
         }
 
         return chain.proceed(requestBuilder.build())
