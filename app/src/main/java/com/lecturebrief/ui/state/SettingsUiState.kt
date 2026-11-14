@@ -1,6 +1,7 @@
 package com.lecturebrief.ui.state
 
 import androidx.compose.runtime.Immutable
+import com.lecturebrief.data.local.prefs.AppColorPalette
 import com.lecturebrief.data.local.prefs.ModelTier
 import com.lecturebrief.data.local.prefs.ProviderPreset
 import com.lecturebrief.data.local.prefs.SecureSettingsStorage
@@ -31,5 +32,6 @@ data class SettingsUiState(
     val connectionSummary: String? = null,
     val connectionError: String? = null,
     val isSaved: Boolean = false,
-    val themeMode: ThemeMode = ThemeMode.SYSTEM_DEFAULT
+    val themeMode: ThemeMode = ThemeMode.SYSTEM_DEFAULT,
+    val colorPalette: AppColorPalette = AppColorPalette.MIDNIGHT_PERIWINKLE
 )

@@ -34,7 +34,11 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val themeMode by appContainer.themePreferences.themeMode.collectAsStateWithLifecycle()
-            LectureBriefTheme(themeMode = themeMode) {
+            val colorPalette by appContainer.themePreferences.colorPalette.collectAsStateWithLifecycle()
+            LectureBriefTheme(
+                themeMode = themeMode,
+                colorPalette = colorPalette
+            ) {
                 Surface {
                     val navController = rememberNavController()
                     NavHost(

@@ -7,9 +7,21 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 enum class ThemeMode(val label: String) {
-    SYSTEM_DEFAULT("System Default"),
+    SYSTEM_DEFAULT("System"),
     LIGHT("Light"),
     DARK("Dark")
+}
+
+enum class AppColorPalette(
+    val label: String,
+    val swatchArgb: Long
+) {
+    MIDNIGHT_PERIWINKLE("Midnight Periwinkle", 0xFF6650A4),
+    DEEP_TEAL("Deep Teal", 0xFF1E4D5E),
+    ROYAL_VIOLET("Royal Violet", 0xFF7C4DFF),
+    EMERALD_FOREST("Emerald Forest", 0xFF2E7D32),
+    CRIMSON_ROSE("Crimson Rose", 0xFFC62828),
+    WARM_AMBER("Warm Amber", 0xFFEF6C00)
 }
 
 class ThemePreferences(context: Context) {
@@ -20,11 +32,21 @@ class ThemePreferences(context: Context) {
     private val _themeMode = MutableStateFlow(readThemeMode())
     val themeMode: StateFlow<ThemeMode> = _themeMode.asStateFlow()
 
+    private val _colorPalette = MutableStateFlow(readColorPalette())
+    val colorPalette: StateFlow<AppColorPalette> = _colorPalette.asStateFlow()
+
     fun setThemeMode(mode: ThemeMode) {
         sharedPreferences.edit()
             .putString(KEY_THEME_MODE, mode.name)
             .apply()
         _themeMode.value = mode
+    }
+
+    fun setColorPalette(palette: AppColorPalette) {
+        sharedPreferences.edit()
+            .putString(KEY_COLOR_PALETTE, palette.name)
+            .apply()
+        _colorPalette.value = palette
     }
 
     private fun readThemeMode(): ThemeMode {
@@ -33,8 +55,15 @@ class ThemePreferences(context: Context) {
             .getOrDefault(ThemeMode.SYSTEM_DEFAULT)
     }
 
+    private fun readColorPalette(): AppColorPalette {
+        val raw = sharedPreferences.getString(KEY_COLOR_PALETTE, AppColorPalette.MIDNIGHT_PERIWINKLE.name)
+        return runCatching { AppColorPalette.valueOf(raw ?: "") }
+            .getOrDefault(AppColorPalette.MIDNIGHT_PERIWINKLE)
+    }
+
     companion object {
         private const val PREFS_FILE_NAME = "lecturebrief_theme_prefs"
         private const val KEY_THEME_MODE = "theme_mode"
+        private const val KEY_COLOR_PALETTE = "color_palette"
     }
 }

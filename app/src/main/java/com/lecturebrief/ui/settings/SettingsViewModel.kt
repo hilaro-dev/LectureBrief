@@ -3,6 +3,7 @@ package com.lecturebrief.ui.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.lecturebrief.data.local.prefs.AppColorPalette
 import com.lecturebrief.data.local.prefs.ModelTier
 import com.lecturebrief.data.local.prefs.ProviderPreset
 import com.lecturebrief.data.local.prefs.ThemeMode
@@ -32,6 +33,11 @@ class SettingsViewModel(
                 _uiState.update { it.copy(themeMode = mode) }
             }
         }
+        viewModelScope.launch {
+            themePreferences.colorPalette.collect { palette ->
+                _uiState.update { it.copy(colorPalette = palette) }
+            }
+        }
     }
 
     private fun initialState(): SettingsUiState {
@@ -49,12 +55,17 @@ class SettingsViewModel(
             chatApiKey = config.chatApiKey,
             chatModel = config.chatModel,
             chatTier = inferChatTier(effectiveChatPreset, config.chatModel),
-            themeMode = themePreferences.themeMode.value
+            themeMode = themePreferences.themeMode.value,
+            colorPalette = themePreferences.colorPalette.value
         )
     }
 
     fun onThemeModeChange(mode: ThemeMode) {
         themePreferences.setThemeMode(mode)
+    }
+
+    fun onColorPaletteChange(palette: AppColorPalette) {
+        themePreferences.setColorPalette(palette)
     }
 
     fun onUseSameProviderChange(enabled: Boolean) {
