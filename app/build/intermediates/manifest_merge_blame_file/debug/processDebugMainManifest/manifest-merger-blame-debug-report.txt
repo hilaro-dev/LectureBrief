@@ -56,171 +56,170 @@
 32-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:15:9-54
 33        android:supportsRtl="true"
 33-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:17:9-35
-34        android:testOnly="true"
-35        android:theme="@android:style/Theme.Material.Light.NoActionBar"
-35-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:18:9-72
-36        android:usesCleartextTraffic="true" >
-36-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:19:9-44
-37        <activity
-37-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:21:9-36:20
-38            android:name="com.lecturebrief.MainActivity"
-38-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:22:13-41
-39            android:exported="true"
-39-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:23:13-36
-40            android:launchMode="singleTop" >
-40-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:24:13-43
-41            <intent-filter>
-41-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:25:13-28:29
-42                <action android:name="android.intent.action.MAIN" />
-42-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:26:17-69
-42-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:26:25-66
-43
-44                <category android:name="android.intent.category.LAUNCHER" />
-44-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:27:17-77
-44-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:27:27-74
-45            </intent-filter>
-46            <intent-filter>
-46-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:29:13-35:29
-47                <action android:name="android.intent.action.SEND" />
-47-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:30:17-69
-47-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:30:25-66
-48
-49                <category android:name="android.intent.category.DEFAULT" />
-49-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:31:17-76
-49-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:31:27-73
-50
-51                <data android:mimeType="audio/*" />
+34        android:theme="@android:style/Theme.Material.Light.NoActionBar"
+34-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:18:9-72
+35        android:usesCleartextTraffic="true" >
+35-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:19:9-44
+36        <activity
+36-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:21:9-36:20
+37            android:name="com.lecturebrief.MainActivity"
+37-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:22:13-41
+38            android:exported="true"
+38-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:23:13-36
+39            android:launchMode="singleTop" >
+39-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:24:13-43
+40            <intent-filter>
+40-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:25:13-28:29
+41                <action android:name="android.intent.action.MAIN" />
+41-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:26:17-69
+41-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:26:25-66
+42
+43                <category android:name="android.intent.category.LAUNCHER" />
+43-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:27:17-77
+43-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:27:27-74
+44            </intent-filter>
+45            <intent-filter>
+45-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:29:13-35:29
+46                <action android:name="android.intent.action.SEND" />
+46-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:30:17-69
+46-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:30:25-66
+47
+48                <category android:name="android.intent.category.DEFAULT" />
+48-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:31:17-76
+48-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:31:27-73
+49
+50                <data android:mimeType="audio/*" />
+50-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:32:17-52
+50-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:32:23-49
+51                <data android:mimeType="video/*" />
 51-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:32:17-52
 51-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:32:23-49
-52                <data android:mimeType="video/*" />
+52                <data android:mimeType="application/ogg" />
 52-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:32:17-52
 52-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:32:23-49
-53                <data android:mimeType="application/ogg" />
-53-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:32:17-52
-53-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:32:23-49
-54            </intent-filter>
-55        </activity>
-56
-57        <service
-57-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:38:9-41:74
-58            android:name="com.lecturebrief.service.AudioRecorderService"
-58-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:39:13-57
-59            android:exported="false"
-59-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:40:13-37
-60            android:foregroundServiceType="microphone|mediaProjection" />
-60-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:41:13-71
-61        <service
-61-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:43:9-46:74
-62            android:name="com.lecturebrief.service.AudioCaptureService"
-62-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:44:13-56
-63            android:exported="false"
-63-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:45:13-37
-64            android:foregroundServiceType="microphone|mediaProjection" />
-64-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:46:13-71
-65
-66        <provider
-67            android:name="androidx.core.content.FileProvider"
-67-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:49:13-62
-68            android:authorities="com.lecturebrief.fileprovider"
-68-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:50:13-64
-69            android:exported="false"
-69-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:51:13-37
-70            android:grantUriPermissions="true" >
-70-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:52:13-47
-71            <meta-data
-71-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:53:13-55:54
-72                android:name="android.support.FILE_PROVIDER_PATHS"
-72-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:54:17-67
-73                android:resource="@xml/file_paths" />
-73-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:55:17-51
-74        </provider>
-75        <provider
-75-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
-76            android:name="androidx.startup.InitializationProvider"
-76-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
-77            android:authorities="com.lecturebrief.androidx-startup"
-77-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
-78            android:exported="false" >
-78-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
-79            <meta-data
-79-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
-80                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-80-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
-81                android:value="androidx.startup" />
-81-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
-82            <meta-data
-82-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\Zeynep\.gradle\caches\8.9\transforms\55b5fdb338f6ecd2eec706b497f8c6d2\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:29:13-31:52
-83                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-83-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\Zeynep\.gradle\caches\8.9\transforms\55b5fdb338f6ecd2eec706b497f8c6d2\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:30:17-78
-84                android:value="androidx.startup" />
-84-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\Zeynep\.gradle\caches\8.9\transforms\55b5fdb338f6ecd2eec706b497f8c6d2\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:31:17-49
-85            <meta-data
-85-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
-86                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-86-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
-87                android:value="androidx.startup" />
-87-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
-88        </provider>
-89
-90        <activity
-90-->[androidx.compose.ui:ui-test-manifest:1.7.5] C:\Users\Zeynep\.gradle\caches\8.9\transforms\eff2481fd4e9e7d9334a6320f3c2a57d\transformed\ui-test-manifest-1.7.5\AndroidManifest.xml:23:9-25:39
-91            android:name="androidx.activity.ComponentActivity"
-91-->[androidx.compose.ui:ui-test-manifest:1.7.5] C:\Users\Zeynep\.gradle\caches\8.9\transforms\eff2481fd4e9e7d9334a6320f3c2a57d\transformed\ui-test-manifest-1.7.5\AndroidManifest.xml:24:13-63
-92            android:exported="true" />
-92-->[androidx.compose.ui:ui-test-manifest:1.7.5] C:\Users\Zeynep\.gradle\caches\8.9\transforms\eff2481fd4e9e7d9334a6320f3c2a57d\transformed\ui-test-manifest-1.7.5\AndroidManifest.xml:25:13-36
-93        <activity
-93-->[androidx.compose.ui:ui-tooling-android:1.7.5] C:\Users\Zeynep\.gradle\caches\8.9\transforms\044d91bbb404c9e0f29cebb96b5aaa85\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
-94            android:name="androidx.compose.ui.tooling.PreviewActivity"
-94-->[androidx.compose.ui:ui-tooling-android:1.7.5] C:\Users\Zeynep\.gradle\caches\8.9\transforms\044d91bbb404c9e0f29cebb96b5aaa85\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
-95            android:exported="true" />
-95-->[androidx.compose.ui:ui-tooling-android:1.7.5] C:\Users\Zeynep\.gradle\caches\8.9\transforms\044d91bbb404c9e0f29cebb96b5aaa85\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
-96
-97        <service
-97-->[androidx.room:room-runtime:2.6.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\639a1423e928ae9477cd931136615089\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
-98            android:name="androidx.room.MultiInstanceInvalidationService"
-98-->[androidx.room:room-runtime:2.6.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\639a1423e928ae9477cd931136615089\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
-99            android:directBootAware="true"
-99-->[androidx.room:room-runtime:2.6.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\639a1423e928ae9477cd931136615089\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
-100            android:exported="false" />
-100-->[androidx.room:room-runtime:2.6.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\639a1423e928ae9477cd931136615089\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
-101
-102        <receiver
-102-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
-103            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-103-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
-104            android:directBootAware="false"
-104-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
-105            android:enabled="true"
-105-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
-106            android:exported="true"
-106-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
-107            android:permission="android.permission.DUMP" >
-107-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
-108            <intent-filter>
-108-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
-109                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-109-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
-109-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
-110            </intent-filter>
-111            <intent-filter>
-111-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
-112                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-112-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
-112-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
-113            </intent-filter>
-114            <intent-filter>
-114-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
-115                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-115-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
-115-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
-116            </intent-filter>
-117            <intent-filter>
-117-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
-118                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-118-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
-118-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
-119            </intent-filter>
-120        </receiver>
-121    </application>
-122
-123</manifest>
+53            </intent-filter>
+54        </activity>
+55
+56        <service
+56-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:38:9-41:74
+57            android:name="com.lecturebrief.service.AudioRecorderService"
+57-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:39:13-57
+58            android:exported="false"
+58-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:40:13-37
+59            android:foregroundServiceType="microphone|mediaProjection" />
+59-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:41:13-71
+60        <service
+60-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:43:9-46:74
+61            android:name="com.lecturebrief.service.AudioCaptureService"
+61-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:44:13-56
+62            android:exported="false"
+62-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:45:13-37
+63            android:foregroundServiceType="microphone|mediaProjection" />
+63-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:46:13-71
+64
+65        <provider
+66            android:name="androidx.core.content.FileProvider"
+66-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:49:13-62
+67            android:authorities="com.lecturebrief.fileprovider"
+67-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:50:13-64
+68            android:exported="false"
+68-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:51:13-37
+69            android:grantUriPermissions="true" >
+69-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:52:13-47
+70            <meta-data
+70-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:53:13-55:54
+71                android:name="android.support.FILE_PROVIDER_PATHS"
+71-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:54:17-67
+72                android:resource="@xml/file_paths" />
+72-->C:\Users\Zeynep\Desktop\projects\AISummarizer\app\src\main\AndroidManifest.xml:55:17-51
+73        </provider>
+74        <provider
+74-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+75            android:name="androidx.startup.InitializationProvider"
+75-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+76            android:authorities="com.lecturebrief.androidx-startup"
+76-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+77            android:exported="false" >
+77-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+78            <meta-data
+78-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+79                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+79-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+80                android:value="androidx.startup" />
+80-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Zeynep\.gradle\caches\8.9\transforms\7dbd484510ca48454d12c4148917f8f6\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+81            <meta-data
+81-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\Zeynep\.gradle\caches\8.9\transforms\55b5fdb338f6ecd2eec706b497f8c6d2\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:29:13-31:52
+82                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+82-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\Zeynep\.gradle\caches\8.9\transforms\55b5fdb338f6ecd2eec706b497f8c6d2\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:30:17-78
+83                android:value="androidx.startup" />
+83-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\Zeynep\.gradle\caches\8.9\transforms\55b5fdb338f6ecd2eec706b497f8c6d2\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:31:17-49
+84            <meta-data
+84-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+85                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+85-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+86                android:value="androidx.startup" />
+86-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+87        </provider>
+88
+89        <activity
+89-->[androidx.compose.ui:ui-test-manifest:1.7.5] C:\Users\Zeynep\.gradle\caches\8.9\transforms\eff2481fd4e9e7d9334a6320f3c2a57d\transformed\ui-test-manifest-1.7.5\AndroidManifest.xml:23:9-25:39
+90            android:name="androidx.activity.ComponentActivity"
+90-->[androidx.compose.ui:ui-test-manifest:1.7.5] C:\Users\Zeynep\.gradle\caches\8.9\transforms\eff2481fd4e9e7d9334a6320f3c2a57d\transformed\ui-test-manifest-1.7.5\AndroidManifest.xml:24:13-63
+91            android:exported="true" />
+91-->[androidx.compose.ui:ui-test-manifest:1.7.5] C:\Users\Zeynep\.gradle\caches\8.9\transforms\eff2481fd4e9e7d9334a6320f3c2a57d\transformed\ui-test-manifest-1.7.5\AndroidManifest.xml:25:13-36
+92        <activity
+92-->[androidx.compose.ui:ui-tooling-android:1.7.5] C:\Users\Zeynep\.gradle\caches\8.9\transforms\044d91bbb404c9e0f29cebb96b5aaa85\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
+93            android:name="androidx.compose.ui.tooling.PreviewActivity"
+93-->[androidx.compose.ui:ui-tooling-android:1.7.5] C:\Users\Zeynep\.gradle\caches\8.9\transforms\044d91bbb404c9e0f29cebb96b5aaa85\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
+94            android:exported="true" />
+94-->[androidx.compose.ui:ui-tooling-android:1.7.5] C:\Users\Zeynep\.gradle\caches\8.9\transforms\044d91bbb404c9e0f29cebb96b5aaa85\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
+95
+96        <service
+96-->[androidx.room:room-runtime:2.6.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\639a1423e928ae9477cd931136615089\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+97            android:name="androidx.room.MultiInstanceInvalidationService"
+97-->[androidx.room:room-runtime:2.6.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\639a1423e928ae9477cd931136615089\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
+98            android:directBootAware="true"
+98-->[androidx.room:room-runtime:2.6.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\639a1423e928ae9477cd931136615089\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+99            android:exported="false" />
+99-->[androidx.room:room-runtime:2.6.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\639a1423e928ae9477cd931136615089\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+100
+101        <receiver
+101-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+102            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+102-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+103            android:directBootAware="false"
+103-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+104            android:enabled="true"
+104-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+105            android:exported="true"
+105-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+106            android:permission="android.permission.DUMP" >
+106-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+107            <intent-filter>
+107-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+108                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+108-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+108-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+109            </intent-filter>
+110            <intent-filter>
+110-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+111                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+111-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+111-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+112            </intent-filter>
+113            <intent-filter>
+113-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+114                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+114-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+114-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+115            </intent-filter>
+116            <intent-filter>
+116-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+117                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+117-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+117-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Zeynep\.gradle\caches\8.9\transforms\351eab5cd665bba9a4d51fa74e2a44a1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+118            </intent-filter>
+119        </receiver>
+120    </application>
+121
+122</manifest>
