@@ -31,13 +31,13 @@ enum class ProviderPreset(
         displayName = "Google Gemini",
         defaultBaseUrl = "https://generativelanguage.googleapis.com/v1beta/openai",
         defaultSttModel = "",
-        defaultChatModel = "gemini-3.8-flash"
+        defaultChatModel = "gemini-3-flash-preview"
     ),
     OMNIROUTE(
         displayName = "OmniRoute (PC Gateway)",
         defaultBaseUrl = "http://192.168.1.X:20128/v1",
         defaultSttModel = "groq/whisper-large-v3",
-        defaultChatModel = "gemini-3.8-flash"
+        defaultChatModel = "gemini-3-flash-preview"
     ),
     CUSTOM(
         displayName = "Custom OpenAI-Compatible",
@@ -60,9 +60,9 @@ enum class ProviderPreset(
 
     fun chatTiers(): List<Pair<ModelTier, String>> = when (this) {
         GEMINI -> listOf(
-            ModelTier.LOW to "gemini-3.1-flash",
-            ModelTier.MEDIUM to "gemini-3.8-flash",
-            ModelTier.HIGH to "gemini-4-hydrogen"
+            ModelTier.LOW to "",
+            ModelTier.MEDIUM to "",
+            ModelTier.HIGH to ""
         )
         GROQ -> listOf(
             ModelTier.LOW to "openai/gpt-oss-20b",
@@ -71,7 +71,7 @@ enum class ProviderPreset(
         )
         OMNIROUTE -> listOf(
             ModelTier.LOW to "gemini-3.1-flash",
-            ModelTier.MEDIUM to "gemini-3.8-flash",
+            ModelTier.MEDIUM to "gemini-3-flash-preview",
             ModelTier.HIGH to "gemini-4-hydrogen"
         )
         CUSTOM -> emptyList()
@@ -94,6 +94,7 @@ data class GatewayConfig(
     val chatBaseUrl: String = SecureSettingsStorage.DEFAULT_CHAT_BASE_URL,
     val chatApiKey: String = "",
     val chatModel: String = SecureSettingsStorage.DEFAULT_CHAT_MODEL,
+    val summaryTier: ModelTier = ModelTier.MEDIUM,
     val systemPrompt: String = SecureSettingsStorage.DEFAULT_SYSTEM_PROMPT
 ) {
     val effectiveChatBaseUrl: String
@@ -123,7 +124,8 @@ class SecureSettingsStorage(context: Context) {
         sttPreset: ProviderPreset = _configFlow.value.sttPreset,
         chatPreset: ProviderPreset = _configFlow.value.chatPreset,
         chatBaseUrl: String = DEFAULT_CHAT_BASE_URL,
-        chatApiKey: String = ""
+        chatApiKey: String = "",
+        summaryTier: ModelTier = _configFlow.value.summaryTier
     ) {
         val normalizedSttUrl = normalizeBaseUrl(baseUrl, fallback = DEFAULT_BASE_URL)
         val normalizedChatUrl = normalizeBaseUrl(chatBaseUrl, fallback = DEFAULT_CHAT_BASE_URL)
@@ -140,6 +142,14 @@ class SecureSettingsStorage(context: Context) {
             .putString(KEY_CHAT_BASE_URL, normalizedChatUrl)
             .putString(KEY_CHAT_API_KEY, chatApiKey.trim())
             .putString(KEY_CHAT_MODEL, normalizedChat)
+            .putString(KEY_SUMMARY_TIER, summaryTier.name)
+            .apply()
+        _configFlow.value = readConfig()
+    }
+
+    fun saveSummaryTier(tier: ModelTier) {
+        sharedPreferences.edit()
+            .putString(KEY_SUMMARY_TIER, tier.name)
             .apply()
         _configFlow.value = readConfig()
     }
@@ -206,6 +216,9 @@ class SecureSettingsStorage(context: Context) {
             chatApiKey = chatKey,
             chatModel = sharedPreferences.getString(KEY_CHAT_MODEL, DEFAULT_CHAT_MODEL)
                 ?.takeIf { it.isNotBlank() } ?: DEFAULT_CHAT_MODEL,
+            summaryTier = sharedPreferences.getString(KEY_SUMMARY_TIER, ModelTier.MEDIUM.name)
+                ?.let { runCatching { ModelTier.valueOf(it) }.getOrNull() }
+                ?: ModelTier.MEDIUM,
             systemPrompt = sharedPreferences.getString(KEY_SYSTEM_PROMPT, DEFAULT_SYSTEM_PROMPT)
                 ?: DEFAULT_SYSTEM_PROMPT
         )
@@ -248,12 +261,13 @@ class SecureSettingsStorage(context: Context) {
         private const val KEY_CHAT_BASE_URL = "chat_base_url"
         private const val KEY_CHAT_API_KEY = "chat_api_key"
         private const val KEY_CHAT_MODEL = "chat_model"
+        private const val KEY_SUMMARY_TIER = "summary_tier"
         private const val KEY_SYSTEM_PROMPT = "system_prompt"
 
         const val DEFAULT_BASE_URL = "https://api.groq.com/openai/v1"
         const val DEFAULT_CHAT_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai"
         const val DEFAULT_STT_MODEL = "whisper-large-v3"
-        const val DEFAULT_CHAT_MODEL = "gemini-3.8-flash"
+        const val DEFAULT_CHAT_MODEL = "gemini-3-flash-preview"
         const val DEFAULT_SYSTEM_PROMPT =
             "You are an academic lecture assistant. Summarize the lecture transcript into a concise overview, bulleted key takeaways, and concrete action items."
 

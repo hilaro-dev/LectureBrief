@@ -600,7 +600,7 @@ fun SettingsScreen(
                         value = uiState.chatModel,
                         onValueChange = onChatModelChange,
                         label = { Text("Custom Summary Model ID") },
-                        placeholder = { Text("gemini-3.8-flash") },
+                        placeholder = { Text("gemini-3-flash-preview") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )

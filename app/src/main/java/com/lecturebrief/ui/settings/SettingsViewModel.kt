@@ -54,7 +54,11 @@ class SettingsViewModel(
             chatBaseUrl = config.chatBaseUrl,
             chatApiKey = config.chatApiKey,
             chatModel = config.chatModel,
-            chatTier = inferChatTier(effectiveChatPreset, config.chatModel),
+            chatTier = if (effectiveChatPreset == ProviderPreset.GEMINI) {
+                config.summaryTier
+            } else {
+                inferChatTier(effectiveChatPreset, config.chatModel)
+            },
             themeMode = themePreferences.themeMode.value,
             colorPalette = themePreferences.colorPalette.value
         )
@@ -79,7 +83,11 @@ class SettingsViewModel(
             state.copy(
                 useSameProvider = enabled,
                 chatModel = updatedChatModel,
-                chatTier = inferChatTier(effectiveChatPreset, updatedChatModel),
+                chatTier = if (effectiveChatPreset == ProviderPreset.GEMINI) {
+                    state.chatTier ?: ModelTier.MEDIUM
+                } else {
+                    inferChatTier(effectiveChatPreset, updatedChatModel)
+                },
                 isSaved = false,
                 connectionStatus = GatewayConnectionStatus.UNTESTED,
                 connectionSummary = null,
@@ -118,7 +126,11 @@ class SettingsViewModel(
                 sttTier = inferSttTier(preset, updatedSttModel),
                 chatPreset = if (state.useSameProvider) preset else state.chatPreset,
                 chatModel = updatedChatModel,
-                chatTier = inferChatTier(effectiveChatPreset, updatedChatModel),
+                chatTier = if (effectiveChatPreset == ProviderPreset.GEMINI) {
+                    state.chatTier ?: ModelTier.MEDIUM
+                } else {
+                    inferChatTier(effectiveChatPreset, updatedChatModel)
+                },
                 isSaved = false,
                 connectionStatus = GatewayConnectionStatus.UNTESTED,
                 connectionSummary = null,
@@ -144,7 +156,11 @@ class SettingsViewModel(
                 chatPreset = preset,
                 chatBaseUrl = updatedChatBaseUrl,
                 chatModel = updatedChatModel,
-                chatTier = inferChatTier(preset, updatedChatModel),
+                chatTier = if (preset == ProviderPreset.GEMINI) {
+                    state.chatTier ?: ModelTier.MEDIUM
+                } else {
+                    inferChatTier(preset, updatedChatModel)
+                },
                 isSaved = false,
                 connectionStatus = GatewayConnectionStatus.UNTESTED,
                 connectionSummary = null,
@@ -169,7 +185,22 @@ class SettingsViewModel(
     fun onChatTierSelected(tier: ModelTier) {
         val current = _uiState.value
         val activePreset = if (current.useSameProvider) current.sttPreset else current.chatPreset
-        val model = activePreset.chatTiers().firstOrNull { it.first == tier }?.second ?: return
+        if (activePreset == ProviderPreset.GEMINI) {
+            settingsRepository.updateSummaryTier(tier)
+            _uiState.update { state ->
+                state.copy(
+                    chatTier = tier,
+                    isSaved = true
+                )
+            }
+            return
+        }
+        val model = activePreset.chatTiers()
+            .firstOrNull { it.first == tier }
+            ?.second
+            ?.takeIf { it.isNotBlank() }
+            ?: return
+        settingsRepository.updateSummaryTier(tier)
         settingsRepository.updateSelectedModels(sttModel = current.sttModel, chatModel = model)
         _uiState.update { state ->
             state.copy(
@@ -243,7 +274,11 @@ class SettingsViewModel(
             val effectivePreset = if (state.useSameProvider) state.sttPreset else state.chatPreset
             state.copy(
                 chatModel = value,
-                chatTier = inferChatTier(effectivePreset, value),
+                chatTier = if (effectivePreset == ProviderPreset.GEMINI) {
+                    state.chatTier ?: ModelTier.MEDIUM
+                } else {
+                    inferChatTier(effectivePreset, value)
+                },
                 isSaved = false
             )
         }
@@ -260,7 +295,8 @@ class SettingsViewModel(
             sttPreset = current.sttPreset,
             chatPreset = if (current.useSameProvider) current.sttPreset else current.chatPreset,
             chatBaseUrl = if (current.useSameProvider) current.baseUrl else current.chatBaseUrl,
-            chatApiKey = if (current.useSameProvider) current.apiKey else current.chatApiKey
+            chatApiKey = if (current.useSameProvider) current.apiKey else current.chatApiKey,
+            summaryTier = current.chatTier ?: ModelTier.MEDIUM
         )
         val saved = settingsRepository.getCurrentConfig()
         val effectiveChatPreset = if (saved.useSameProvider) saved.sttPreset else saved.chatPreset
@@ -276,7 +312,11 @@ class SettingsViewModel(
                 chatBaseUrl = saved.chatBaseUrl,
                 chatApiKey = saved.chatApiKey,
                 chatModel = saved.chatModel,
-                chatTier = it.chatTier ?: inferChatTier(effectiveChatPreset, saved.chatModel),
+                chatTier = if (effectiveChatPreset == ProviderPreset.GEMINI) {
+                    saved.summaryTier
+                } else {
+                    it.chatTier ?: inferChatTier(effectiveChatPreset, saved.chatModel)
+                },
                 isSaved = true
             )
         }

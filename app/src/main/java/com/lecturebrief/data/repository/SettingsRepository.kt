@@ -1,6 +1,7 @@
 package com.lecturebrief.data.repository
 
 import com.lecturebrief.data.local.prefs.GatewayConfig
+import com.lecturebrief.data.local.prefs.ModelTier
 import com.lecturebrief.data.local.prefs.ProviderPreset
 import com.lecturebrief.data.local.prefs.SecureSettingsStorage
 import com.lecturebrief.data.remote.GeminiModelResolver
@@ -37,7 +38,8 @@ class SettingsRepository(
         sttPreset: ProviderPreset = getCurrentConfig().sttPreset,
         chatPreset: ProviderPreset = getCurrentConfig().chatPreset,
         chatBaseUrl: String = baseUrl,
-        chatApiKey: String = apiKey
+        chatApiKey: String = apiKey,
+        summaryTier: ModelTier = getCurrentConfig().summaryTier
     ) {
         secureSettingsStorage.saveSettings(
             baseUrl = baseUrl,
@@ -48,8 +50,13 @@ class SettingsRepository(
             sttPreset = sttPreset,
             chatPreset = chatPreset,
             chatBaseUrl = chatBaseUrl,
-            chatApiKey = chatApiKey
+            chatApiKey = chatApiKey,
+            summaryTier = summaryTier
         )
+    }
+
+    fun updateSummaryTier(tier: ModelTier) {
+        secureSettingsStorage.saveSummaryTier(tier)
     }
 
     fun updateGatewayCredentials(baseUrl: String, apiKey: String) {
@@ -101,7 +108,7 @@ class SettingsRepository(
         val chatResult = if (GeminiModelResolver.isGeminiChatConfig(config)) {
             GeminiModelResolver.resolveBestModel(
                 apiKey = config.effectiveChatApiKey,
-                tier = GeminiModelResolver.inferTier(config.chatModel)
+                tier = config.summaryTier
             ).map { resolution ->
                 secureSettingsStorage.saveSelectedModels(
                     sttModel = config.sttModel,

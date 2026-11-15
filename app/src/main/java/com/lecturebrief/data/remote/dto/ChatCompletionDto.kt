@@ -14,7 +14,9 @@ data class ChatCompletionRequestDto(
     @SerialName("max_tokens")
     val maxTokens: Int? = null,
     @SerialName("stream")
-    val stream: Boolean = false
+    val stream: Boolean = false,
+    @SerialName("reasoning_effort")
+    val reasoningEffort: String? = null
 )
 
 @Serializable

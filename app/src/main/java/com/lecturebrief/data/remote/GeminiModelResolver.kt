@@ -56,25 +56,12 @@ object GeminiModelResolver {
         "computer-use"
     )
 
-    private val LOW_PREFERENCES = listOf(
-        "gemini-3.1-flash-lite-preview",
-        "gemini-3.1-flash",
-        "gemini-2.5-flash-lite",
-        "gemini-2.5-flash"
-    )
-
-    private val MEDIUM_PREFERENCES = listOf(
-        "gemini-3.8-flash",
+    private val FLASH_PREFERENCES = listOf(
         "gemini-3-flash-preview",
-        "gemini-3.1-flash",
-        "gemini-2.5-flash"
-    )
-
-    private val HIGH_PREFERENCES = listOf(
-        "gemini-4-hydrogen",
-        "gemini-3.1-pro-preview",
-        "gemini-2.5-pro",
-        "gemini-3-flash-preview"
+        "gemini-3.1-flash-lite-preview",
+        "gemini-2.5-flash",
+        "gemini-2.5-flash-lite",
+        "gemini-3.1-flash"
     )
 
     fun isGeminiChatConfig(config: GatewayConfig): Boolean {
@@ -95,7 +82,7 @@ object GeminiModelResolver {
 
     suspend fun resolveBestModel(
         apiKey: String,
-        tier: ModelTier
+        @Suppress("UNUSED_PARAMETER") tier: ModelTier = ModelTier.MEDIUM
     ): Result<GeminiResolutionResult> = withContext(Dispatchers.IO) {
         runCatching {
             val trimmedKey = apiKey.trim()
@@ -137,15 +124,10 @@ object GeminiModelResolver {
                 "No generateContent-capable Gemini models were found for this API key."
             }
 
-            val preferredOrder = when (tier) {
-                ModelTier.LOW -> LOW_PREFERENCES
-                ModelTier.MEDIUM -> MEDIUM_PREFERENCES
-                ModelTier.HIGH -> HIGH_PREFERENCES
-            }
-
-            val bestModel = preferredOrder.firstOrNull { preferred ->
-                candidatePool.any { it.equals(preferred, ignoreCase = true) }
-            } ?: candidatePool.first()
+            val bestModel = FLASH_PREFERENCES.firstNotNullOfOrNull { preferred ->
+                candidatePool.firstOrNull { it.equals(preferred, ignoreCase = true) }
+            } ?: candidatePool.firstOrNull { it.contains("flash", ignoreCase = true) }
+                ?: candidatePool.first()
 
             GeminiResolutionResult(
                 resolvedModelId = bestModel,
