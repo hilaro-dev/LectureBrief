@@ -107,18 +107,24 @@ class ProcessingRepository(
                         }
                         updateProgress(recordingId, stepLabel)
 
-                        val mimeType = when (chunkFile.extension.lowercase()) {
+                        val ext = chunkFile.extension.lowercase()
+                        val mimeType = when (ext) {
                             "m4a", "mp4" -> "audio/mp4"
                             "mp3" -> "audio/mpeg"
                             "wav" -> "audio/wav"
-                            "ogg" -> "audio/ogg"
+                            "ogg", "opus" -> "audio/ogg"
                             "aac" -> "audio/aac"
                             "flac" -> "audio/flac"
                             else -> "audio/mp4"
                         }
+                        val uploadFilename = if (ext == "opus") {
+                            "${chunkFile.nameWithoutExtension}.ogg"
+                        } else {
+                            chunkFile.name
+                        }
                         val filePart = MultipartBody.Part.createFormData(
                             name = "file",
-                            filename = chunkFile.name,
+                            filename = uploadFilename,
                             body = chunkFile.asRequestBody(mimeType.toMediaType())
                         )
                         val promptBody = if (index > 0 && stitchedTranscript.isNotEmpty()) {

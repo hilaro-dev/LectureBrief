@@ -41,7 +41,10 @@ class AudioExtractor(
             }
             val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
 
-            val isDirectAudio = (mimeType.startsWith("audio/") || extension in DIRECT_AUDIO_EXTENSIONS) &&
+            val isDirectAudio = (mimeType.startsWith("audio/") ||
+                mimeType == "application/ogg" ||
+                mimeType.contains("opus") ||
+                extension in DIRECT_AUDIO_EXTENSIONS) &&
                 extension !in VIDEO_CONTAINER_EXTENSIONS &&
                 !mimeType.startsWith("video/")
 
@@ -207,21 +210,62 @@ class AudioExtractor(
         }
     }
 
+    /**
+     * Immediately copies a shared content:// URI into internal cache while temporary read permission
+     * is active, preserving or inferring the file extension from ContentResolver or the intent MIME.
+     */
+    suspend fun stageSharedMedia(uri: Uri, fallbackMimeType: String?): Result<File> =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                val displayName = resolveDisplayName(uri)
+                val rawExt = displayName.substringAfterLast('.', "").lowercase()
+                val mimeType = (context.contentResolver.getType(uri) ?: fallbackMimeType).orEmpty().lowercase()
+                val extension = rawExt.ifBlank { mimeToExtension(mimeType) }
+
+                val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
+                val rawBase = displayName.substringBeforeLast('.').ifBlank { "Shared_$timestamp" }
+                val safeBase = rawBase.replace(Regex("[^A-Za-z0-9._ -]"), "_").trim().ifBlank { "Shared_$timestamp" }
+
+                val sharedDir = File(context.cacheDir, "$SHARED_IMPORTS_DIR/$timestamp").apply {
+                    if (!exists()) mkdirs()
+                }
+                val stagedFile = File(sharedDir, "$safeBase.$extension")
+                copyUriToFile(uri, stagedFile)
+                stagedFile
+            }
+        }
+
     private fun mimeToAudioExtension(mimeType: String): String {
         return when {
             mimeType.contains("mpeg") || mimeType.contains("mp3") -> "mp3"
             mimeType.contains("wav") -> "wav"
+            mimeType.contains("opus") -> "opus"
             mimeType.contains("ogg") -> "ogg"
             mimeType.contains("aac") -> "aac"
+            mimeType.contains("flac") -> "flac"
             else -> "m4a"
+        }
+    }
+
+    private fun mimeToExtension(mimeType: String): String {
+        return when {
+            mimeType.startsWith("video/") -> when {
+                mimeType.contains("webm") -> "webm"
+                mimeType.contains("matroska") || mimeType.contains("mkv") -> "mkv"
+                mimeType.contains("quicktime") -> "mov"
+                mimeType.contains("3gpp") -> "3gp"
+                else -> "mp4"
+            }
+            else -> mimeToAudioExtension(mimeType)
         }
     }
 
     companion object {
         private const val RECORDINGS_DIR = "recordings"
+        private const val SHARED_IMPORTS_DIR = "shared_imports"
         private const val DEFAULT_BUFFER_SIZE = 256 * 1024
 
-        private val DIRECT_AUDIO_EXTENSIONS = setOf("mp3", "m4a", "wav", "ogg", "aac", "flac")
+        private val DIRECT_AUDIO_EXTENSIONS = setOf("mp3", "m4a", "wav", "ogg", "opus", "aac", "flac")
         private val VIDEO_CONTAINER_EXTENSIONS = setOf("mp4", "mkv", "mov", "webm", "avi", "3gp")
     }
 }
